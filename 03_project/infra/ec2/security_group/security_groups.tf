@@ -13,6 +13,9 @@ resource "aws_security_group" "web" {
     protocol = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = "aws05-http"
+  }
 }
 
 resource "aws_security_group" "ssh" {
@@ -30,4 +33,29 @@ resource "aws_security_group" "ssh" {
     protocol = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+  Name = "aws05-ssh"
+  }
+  
+}
+
+resource "aws_security_group" "https" {
+  name = "aws05-instance-https"
+  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  ingress {
+    from_port   = var.https_port
+    to_port     = var.https_port
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+  Name = "aws05-https"
+  }
+
 }

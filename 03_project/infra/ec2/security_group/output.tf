@@ -7,3 +7,8 @@ output "aws-security-group-web-id" {
   value       = aws_security_group.web.id
   description = "The Security_group's id for WEB"
 }
+
+output "aws-security-group-https-id" {
+  value       = aws_security_group.https.id
+  description = "The Security_group's id for https"
+}
