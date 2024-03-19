@@ -1,5 +1,5 @@
 resource "aws_instance" "target" {
-  ami = "ami-09eb4311cbaecf89d"
+  ami = "ami-0d3d9b94632ba1e57"
   instance_type = "t2.micro"
   key_name = "aws05-key"
 
@@ -7,11 +7,9 @@ resource "aws_instance" "target" {
 
   subnet_id = data.terraform_remote_state.vpc.outputs.public-subnet-2a-id
 
-  # user_data = "${base64encode(data.template_file.user_data.rendered)}"
+  vpc_security_group_ids = [data.terraform_remote_state.Security_groups.outputs.aws-security-group-ssh-id]
 
-  vpc_security_group_ids = [data.terraform_remote_state.Security_groups.outputs.aws-security-group-ssh-id,
-                            data.terraform_remote_state.Security_groups.outputs.aws-security-group-web-id,
-                            data.terraform_remote_state.Security_groups.outputs.aws-security-group-https-id]
+  user_data = templatefile("templates/userdata.sh",{})
 
   tags = {
     Name = "aws05-target"
