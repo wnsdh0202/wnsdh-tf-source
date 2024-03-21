@@ -5,7 +5,8 @@ resource "aws_instance" "jenkins" {
   private_ip = "10.5.64.100"
   # associate_public_ip_address = true # 퍼블릭 아이피 활성화
   vpc_security_group_ids = [data.terraform_remote_state.Security_groups.outputs.aws-security-group-ssh-id,
-                            data.terraform_remote_state.Security_groups.outputs.aws-security-group-http-id]
+                            data.terraform_remote_state.Security_groups.outputs.aws-security-group-http-id,
+                            data.terraform_remote_state.Security_groups.outputs.aws-security-group-jenkins_http_id]
   subnet_id = data.terraform_remote_state.vpc.outputs.private-subnet-2a-id
 
   user_data = templatefile("templates/userdata.sh", {})

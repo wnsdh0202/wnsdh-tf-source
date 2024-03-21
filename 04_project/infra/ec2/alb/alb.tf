@@ -10,7 +10,7 @@
 // 로드밸런스 리스너 - jenkins
 resource "aws_lb_listener" "jenkins_http" {
   load_balancer_arn = var.alb-arn
-  port              = 81
+  port              = 8080
   protocol          = "HTTP"
   default_action {
     type = "fixed-response"
@@ -47,7 +47,7 @@ resource "aws_lb_listener_rule" "jenkins" {
 resource "aws_lb_target_group" "jenkins" {
   name     = "aws05-jenkins"
   target_type = "instance"
-  port     = var.http-port
+  port     = 8080
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.vpc.outputs.vpc_id
 
@@ -65,7 +65,7 @@ resource "aws_lb_target_group" "jenkins" {
 resource "aws_lb_target_group_attachment" "jenkins" {
   target_group_arn = aws_lb_target_group.jenkins.arn
   target_id = data.terraform_remote_state.jenkins_instance.outputs.jenkins_id
-  port = var.http-port
+  port = 8080
 }
 
 # # 시작 템플릿

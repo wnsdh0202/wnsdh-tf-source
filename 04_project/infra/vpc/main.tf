@@ -18,6 +18,8 @@ resource "aws_subnet" "aws05-public-subnet-2a" {
 
   tags = {
     Name = "aws05-public-subnet-2a"
+    "kubernetes.io/role/elb" = 1
+    "alpha.eksctl.io/cluster-oidc-enabled" = true
   }
 }
 
@@ -28,6 +30,8 @@ resource "aws_subnet" "aws05-private-subnet-2a" {
 
   tags = {
     Name = "aws05-private-subnet-2a"
+    "kubernetes.io/role/internal-elb" = 1
+    "alpha.eksctl.io/cluster-oidc-enabled" = true
   }
 }
 
@@ -39,6 +43,8 @@ resource "aws_subnet" "aws05-public-subnet-2c" {
 
   tags = {
     Name = "aws05-public-subnet-2c"
+    "kubernetes.io/role/elb" = 1
+    "alpha.eksctl.io/cluster-oidc-enabled" = true
   }
 }
 
@@ -49,6 +55,8 @@ resource "aws_subnet" "aws05-private-subnet-2c" {
 
   tags = {
     Name = "aws05-private-subnet-2c"
+    "kubernetes.io/role/internal-elb" = 1
+    "alpha.eksctl.io/cluster-oidc-enabled" = true
   }
 }
 

@@ -60,12 +60,12 @@ resource "aws_security_group" "https" {
 
 }
 
-resource "aws_security_group" "target_http" {
-  name = "aws05-target-http"
+resource "aws_security_group" "jenkins_http" {
+  name = "aws05-jenkins-http"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
   ingress {
-    from_port   = var.target_port
-    to_port     = var.target_port
+    from_port   = var.jenkins_port
+    to_port     = var.jenkins_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -76,6 +76,6 @@ resource "aws_security_group" "target_http" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "aws05-target-http"
+    Name = "aws05-jenkins-http"
   }
 }
