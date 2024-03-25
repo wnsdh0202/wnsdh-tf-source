@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "terraform-state" {
-  bucket = "aws05-terraform-state"
+  bucket = "project01-terraform-state"
 
   # 실수로 버킷을 삭제하는 것을 방지한다.
   # lifecycle {
@@ -12,12 +12,12 @@ resource "aws_s3_bucket" "terraform-state" {
   force_destroy = true
 
   tags = {
-    Name = "aws05-terraform-state"
+    Name = "project01-terraform-state"
   }
 }
 
 resource "aws_dynamodb_table" "terraform-locks" {
-  name         = "aws05-terraform-locks"
+  name         = "project01-terraform-locks"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
